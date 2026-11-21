@@ -21,7 +21,8 @@ jobs:
 
       - name: 找到工程目录
         run: |
-          if [ -f QingPing-Android.zip ]; then unzip -q -o QingPing-Android.zip -d _src; fi
+          shopt -s nullglob
+          for z in *.zip; do unzip -q -o "$z" -d _src; done
           if [ -f settings.gradle.kts ]; then
             echo "PROJECT_DIR=." >> "$GITHUB_ENV"
           elif [ -f _src/QingPing/settings.gradle.kts ]; then
