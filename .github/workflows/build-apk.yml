@@ -38,8 +38,11 @@ jobs:
           yes | sdkmanager --licenses > /dev/null || true
           gradle :app:assembleDebug --no-daemon --stacktrace
 
+      - name: 列出生成的 APK
+        run: find . -name "*.apk" -print
+
       - uses: actions/upload-artifact@v4
         with:
           name: QingPing-debug-apk
-          path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk
+          path: "**/build/outputs/apk/debug/*.apk"
           if-no-files-found: error
